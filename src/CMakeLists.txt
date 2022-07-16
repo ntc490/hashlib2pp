@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.16)
-project(hl++ LANGUAGES CXX)
 
 add_library(hl++
   hashlibpp.h
@@ -29,3 +28,34 @@ add_library(hl++
   hl_types.h
   )
 
+add_library(hl++::hl++ ALIAS hl++)
+target_include_directories(hl++
+  PUBLIC
+  ${PROJECT_SOURCE_DIR}/src
+  )
+
+# Install library
+install(TARGETS hl++ EXPORT hl++Targets
+  LIBRARY DESTINATION lib
+  INCLUDES DESTINATION include
+  )
+
+# Install header files
+install(FILES
+  ${PROJECT_SOURCE_DIR}/src/hl_hashwrapper.h
+  ${PROJECT_SOURCE_DIR}/src/hl_wrapperfactory.h
+  ${PROJECT_SOURCE_DIR}/src/hl_exception.h
+  ${PROJECT_SOURCE_DIR}/src/hl_md5.h
+  ${PROJECT_SOURCE_DIR}/src/hl_md5wrapper.h
+  ${PROJECT_SOURCE_DIR}/src/hl_sha1.h
+  ${PROJECT_SOURCE_DIR}/src/hl_sha1wrapper.h
+  ${PROJECT_SOURCE_DIR}/src/hl_sha2mac.h
+  ${PROJECT_SOURCE_DIR}/src/hl_sha256.h
+  ${PROJECT_SOURCE_DIR}/src/hl_sha256wrapper.h
+  ${PROJECT_SOURCE_DIR}/src/hl_sha2ext.h
+  ${PROJECT_SOURCE_DIR}/src/hl_sha384wrapper.h
+  ${PROJECT_SOURCE_DIR}/src/hl_sha512wrapper.h
+  ${PROJECT_SOURCE_DIR}/src/hl_types.h
+  ${PROJECT_SOURCE_DIR}/src/hashlibpp.h
+  DESTINATION include
+  )
